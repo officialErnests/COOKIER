@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbug8uf2jfnsj"]
+
+[ext_resource type="Texture2D" uid="uid://bvevm53cnx2x6" path="res://Assets/Cookie.png" id="1_kelma"]
+[ext_resource type="Script" uid="uid://db47kpyvsoi4f" path="res://Scripts/player.gd" id="1_y8w33"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_y8w33")
+
+[node name="Charecter" type="Sprite2D" parent="."]
+texture = ExtResource("1_kelma")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.995688, 1)
+polygon = PackedVector2Array(-6.02598, -8, 6.02598, -8, 6.02598, -7, 7.03031, -7, 7.03031, -5, 8.03465, -5, 8.03465, 7, 7.03031, 7, 7.03031, 8, -6.02598, 8, -6.02598, 7, -7.03031, 7, -7.03031, 6, -8.03465, 6, -8.03465, -6, -7.03031, -6, -7.03031, -7, -6.02598, -7)
+
+[node name="MainCam" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="MainCam"]
+z_index = -10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.92, 0.506, 0, 1)
