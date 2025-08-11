@@ -15,3 +15,4 @@ polygon = PackedVector2Array(-6.02598, -8, 6.02598, -8, 6.02598, -7, 7.03031, -7
 
 [node name="MainCam" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
