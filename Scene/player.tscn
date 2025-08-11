@@ -17,3 +17,9 @@ polygon = PackedVector2Array(-6.02598, -8, 6.02598, -8, 6.02598, -7, 7.03031, -7
 [node name="MainCam" type="Camera2D" parent="."]
 position_smoothing_speed = 10.0
 script = ExtResource("3_xa75v")
+
+[node name="BlocksEaten" type="CanvasLayer" parent="MainCam"]
+
+[node name="Label" type="Label" parent="MainCam/BlocksEaten"]
+offset_right = 40.0
+offset_bottom = 23.0
