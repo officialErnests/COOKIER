@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbug8uf2jfnsj"]
+[gd_scene load_steps=4 format=3 uid="uid://cbug8uf2jfnsj"]
 
 [ext_resource type="Texture2D" uid="uid://bvevm53cnx2x6" path="res://Assets/Cookie.png" id="1_kelma"]
 [ext_resource type="Script" uid="uid://db47kpyvsoi4f" path="res://Scripts/player.gd" id="1_y8w33"]
+[ext_resource type="Script" uid="uid://cpkyhpmup6sb2" path="res://Scripts/main_cam_follow.gd" id="3_xa75v"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_y8w33")
@@ -14,5 +15,5 @@ scale = Vector2(0.995688, 1)
 polygon = PackedVector2Array(-6.02598, -8, 6.02598, -8, 6.02598, -7, 7.03031, -7, 7.03031, -5, 8.03465, -5, 8.03465, 7, 7.03031, 7, 7.03031, 8, -6.02598, 8, -6.02598, 7, -7.03031, 7, -7.03031, 6, -8.03465, 6, -8.03465, -6, -7.03031, -6, -7.03031, -7, -6.02598, -7)
 
 [node name="MainCam" type="Camera2D" parent="."]
-position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+script = ExtResource("3_xa75v")

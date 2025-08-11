@@ -19,31 +19,36 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		velocity *= 0.99
 		velocity.x += Input.get_axis("left","right") * delta * SPEED
-		if prev_velocity.y > 200:
-			ground.destory(position + Vector2(0,-16),1)
+		if prev_velocity.y > 500:
+			camera.global_position = global_position
+			ground.destory(position + Vector2(0,-16),floor(prev_velocity.y/500))
 		if Input.is_action_pressed("jump"):
 			velocity.y = -300
 		if Input.is_action_pressed("down"):
+			if prev_velocity.y > 1000:
+				velocity.x += prev_velocity.y if velocity.x > 0 else -prev_velocity.y
 			velocity.x += 1000 * delta if velocity.x > 0 else -1000 * delta
 			velocity *= 0.98
-			camera.position = velocity/20 * Vector2(randi_range(-1,1),randi_range(-1,1))
+			camera.NB_velocity += velocity/100 * Vector2(randi_range(-1,1),randi_range(-1,1))
 			charge = true
 	else:
 		velocity *= 0.995
 		velocity.x += Input.get_axis("left","right") * delta * SPEED / 2
 		if Input.is_action_pressed("down"):
-			velocity.y += 50
+			velocity.y += 100
 	if is_on_wall():
 		if abs(prev_velocity.x) > 300:
 			ground.destory(position + Vector2(0,-16*1.5),1)
-			print(int(Input.get_axis("left","right")), getDirection(prev_velocity.x))
+			# print(int(Input.get_axis("left","right")), getDirection(prev_velocity.x))
 			if Input.get_axis("left","right") == getDirection(prev_velocity.x) * -1:
 				velocity.x = -prev_velocity.x 
+				camera.NB_global_pos.x = global_position.x
 			else:
 				velocity.x = prev_velocity.x 
+				camera.NB_velocity += velocity / 100
 			# position.x -= velocity.x / 100
 		if Input.is_action_pressed("jump"):
-			velocity.y -= 10
+			velocity.y -= 100
 	# angular_velocity += Input.get_axis("left","right") * delta * SPEED / 10
 	prev_velocity = velocity
 	if not charge:
