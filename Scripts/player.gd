@@ -22,6 +22,8 @@ func _physics_process(delta: float) -> void:
 		if prev_velocity.y > 500:
 			camera.global_position = global_position
 			ground.destory(position + Vector2(0,-16),floor(prev_velocity.y/500))
+			camera.NB_zoomVel -= prev_velocity.y/1000
+			camera.zoom = Vector2.ONE * 5
 		if Input.is_action_pressed("jump"):
 			velocity.y = -300
 		if Input.is_action_pressed("down"):
@@ -38,19 +40,20 @@ func _physics_process(delta: float) -> void:
 			velocity.y += 100
 	if is_on_wall():
 		if abs(prev_velocity.x) > 300:
-			ground.destory(position + Vector2(0,-16*1.5),1)
+			ground.destory(position + Vector2(0,-16*1.5),abs(prev_velocity.x)/300)
 			# print(int(Input.get_axis("left","right")), getDirection(prev_velocity.x))
 			if Input.get_axis("left","right") == getDirection(prev_velocity.x) * -1:
 				velocity.x = -prev_velocity.x 
 				camera.NB_global_pos.x = global_position.x
 			else:
-				velocity.x = prev_velocity.x 
+				velocity.x = prev_velocity.x * 0.99
 				camera.NB_velocity += velocity / 100
 			# position.x -= velocity.x / 100
 		if Input.is_action_pressed("jump"):
 			velocity.y -= 100
 	# angular_velocity += Input.get_axis("left","right") * delta * SPEED / 10
 	prev_velocity = velocity
+	camera.NB_zoomVel -= velocity.length() / 200000
 	if not charge:
 		camera.position = Vector2(0,0)
 		move_and_slide()

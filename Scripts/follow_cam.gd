@@ -1,4 +1,7 @@
 extends ColorRect
 
-func _process(_delta: float) -> void:
-	global_position = get_viewport().get_camera_2d().global_position - size/2
+@export var spinn = 0
+
+func _process(delta: float) -> void:
+	rotation += spinn * delta
+	global_position = (get_viewport().get_camera_2d().global_position - size/2)

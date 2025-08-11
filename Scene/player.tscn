@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbug8uf2jfnsj"]
+[gd_scene load_steps=6 format=3 uid="uid://cbug8uf2jfnsj"]
 
 [ext_resource type="Texture2D" uid="uid://bvevm53cnx2x6" path="res://Assets/Cookie.png" id="1_kelma"]
 [ext_resource type="Script" uid="uid://db47kpyvsoi4f" path="res://Scripts/player.gd" id="1_y8w33"]
 [ext_resource type="Script" uid="uid://cpkyhpmup6sb2" path="res://Scripts/main_cam_follow.gd" id="3_xa75v"]
+[ext_resource type="Theme" uid="uid://b7q7d172o1ecr" path="res://Themes/main.tres" id="4_58ae2"]
+[ext_resource type="Script" uid="uid://c3rmepsfchfqx" path="res://Scripts/cookierlevel.gd" id="5_ivevv"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_y8w33")
@@ -20,6 +22,14 @@ script = ExtResource("3_xa75v")
 
 [node name="BlocksEaten" type="CanvasLayer" parent="MainCam"]
 
-[node name="Label" type="Label" parent="MainCam/BlocksEaten"]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="COOKIERLEVEL" type="Label" parent="MainCam/BlocksEaten"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_58ae2")
+text = "COOKIER LEVEL:"
+script = ExtResource("5_ivevv")
