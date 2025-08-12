@@ -20,7 +20,10 @@ func destory(in_position, radius) -> void:
 			if get_cell_tile_data(t_position + Vector2i(x - radius - 1, y - radius - 1)):
 				erase_cell(t_position + Vector2i(x - radius - 1, y - radius - 1))
 				particles((t_position + Vector2i(x - radius - 1, y - radius - 1))*16)
-	CookLevel.cook_level += pow(radius * 2,2)
+	CookLevel.cook_level += pow(radius * 2,2) * CookLevel.cook_multiplier
+	CookLevel.cook_multiplier += pow(radius * 2,2)
+	CookLevel.time_till_end = CookLevel.max_time
+	CookLevel.cook_o_Explosions.emit(pow(radius * 2,2))
 	set_cells_terrain_connect(pos2,0,0)
 
 func particles(in_position) -> void:

@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 		if prev_velocity.y > 500:
 			camera.global_position = global_position
 			ground.destory(position + Vector2(0,-16),floor(prev_velocity.y/500))
-			camera.NB_zoomVel -= prev_velocity.y/1000
+			camera.NB_zoomVel -= 1/camera.zoom.x
 			camera.zoom = Vector2.ONE * 5
 		if Input.is_action_pressed("jump"):
 			velocity.y = -300

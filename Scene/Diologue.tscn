@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://j2uhm2sc14sb"]
+
+[ext_resource type="Script" uid="uid://4mf8yn87h3gh" path="res://Scripts/dialogue.gd" id="1_317tr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mypys"]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_317tr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mypys")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
