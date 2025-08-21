@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhg68wja55ttk"]
+[gd_scene load_steps=12 format=3 uid="uid://bhg68wja55ttk"]
 
 [ext_resource type="Script" uid="uid://dy0rmhk6dj8ie" path="res://Scripts/Moving_Main.gd" id="1_6nqpc"]
 [ext_resource type="Texture2D" uid="uid://rk7yxwmwofek" path="res://Assets/Main_menu_BG.png" id="2_qf8tx"]
@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://csc4i418y7d0" path="res://Assets/Main_menu_Button_bottom.png" id="4_vbdn0"]
 [ext_resource type="Texture2D" uid="uid://dnkbkvwwo4skd" path="res://Assets/Main_menu_Button_top.png" id="5_x2pvq"]
 [ext_resource type="Texture2D" uid="uid://d2gmnmiipjdg1" path="res://Assets/Main_menu_Cookier.png" id="6_du3yi"]
-[ext_resource type="Texture2D" uid="uid://cvxf5nvpjocyb" path="res://Assets/Main_menu_LongText.png" id="7_55g6a"]
+[ext_resource type="Theme" uid="uid://b7q7d172o1ecr" path="res://Themes/main.tres" id="6_qf8tx"]
+[ext_resource type="Script" uid="uid://b7llbb1lxtfng" path="res://Scripts/Main_menu.gd" id="6_v5kgo"]
 
 [sub_resource type="Curve" id="Curve_p3x8m"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.025641, 0.520311), 0.0, 0.0, 0, 0, Vector2(0.864469, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -52,6 +53,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Control"]
 z_index = -5
@@ -74,6 +76,7 @@ offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.2, 1.2)
+mouse_filter = 2
 color = Color(0.921569, 0.505882, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
@@ -89,6 +92,7 @@ offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.2, 1.2)
+mouse_filter = 2
 texture = ExtResource("2_qf8tx")
 expand_mode = 1
 
@@ -100,8 +104,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("3_v5kgo")
 expand_mode = 1
+script = ExtResource("6_v5kgo")
+
+[node name="Audio" type="VSlider" parent="TextureRect2"]
+z_index = 30
+layout_mode = 0
+offset_left = 582.0
+offset_top = 106.0
+offset_right = 598.0
+offset_bottom = 306.0
+theme = ExtResource("6_qf8tx")
+max_value = 1.0
+step = 0.1
+tick_count = 11
+ticks_on_borders = true
 
 [node name="TextureRect3" type="TextureRect" parent="."]
 z_index = 9
@@ -111,8 +130,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("4_vbdn0")
 expand_mode = 1
+script = ExtResource("6_v5kgo")
+
+[node name="Button2" type="Button" parent="TextureRect3"]
+z_index = 20
+layout_mode = 0
+offset_left = 83.0
+offset_top = 293.0
+offset_right = 629.0
+offset_bottom = 378.0
+rotation = -0.162008
+scale = Vector2(0.458604, 0.540495)
+theme = ExtResource("6_qf8tx")
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/font_size = 66
+text = "V-PARTICLES"
+expand_icon = true
 
 [node name="TextureRect4" type="TextureRect" parent="."]
 z_index = 10
@@ -122,8 +158,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("5_x2pvq")
 expand_mode = 1
+script = ExtResource("6_v5kgo")
+
+[node name="Play" type="Button" parent="TextureRect4"]
+z_index = 10
+layout_mode = 0
+offset_left = 85.0
+offset_top = 161.0
+offset_right = 338.0
+offset_bottom = 246.0
+rotation = 0.0581182
+scale = Vector2(1.03114, 0.682606)
+theme = ExtResource("6_qf8tx")
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/font_size = 66
+text = "PLAY"
 
 [node name="TextureRect5" type="TextureRect" parent="."]
 z_index = 12
@@ -133,16 +185,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("6_du3yi")
 expand_mode = 1
 
-[node name="TextureRect6" type="TextureRect" parent="."]
-z_index = 11
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_55g6a")
-expand_mode = 1
+[connection signal="value_changed" from="TextureRect2/Audio" to="TextureRect2" method="_on_audio_value_changed"]
+[connection signal="button_up" from="TextureRect3/Button2" to="TextureRect3" method="_on_button_2_button_up"]
+[connection signal="button_up" from="TextureRect4/Play" to="TextureRect4" method="_on_play_button_up"]

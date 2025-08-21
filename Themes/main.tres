@@ -1,9 +1,43 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b7q7d172o1ecr"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://b7q7d172o1ecr"]
 
 [ext_resource type="FontFile" uid="uid://dfeb7ogum4ce4" path="res://Audiowide/Audiowide-Regular.ttf" id="1_dt1p4"]
+[ext_resource type="Texture2D" uid="uid://bvevm53cnx2x6" path="res://Assets/Cookie.png" id="2_dn4vi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dt1p4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dn4vi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_apm7t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1lsov"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m4fr6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4ubf7"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_r0ra0"]
+content_margin_left = 29.0
+grow_begin = -10.0
+grow_end = -10.0
+thickness = 5
+vertical = true
 
 [resource]
+Button/colors/font_color = Color(0.92549, 0.364706, 0.0941176, 1)
+Button/colors/font_outline_color = Color(0.399308, 0.131811, 0.00324021, 1)
+Button/constants/outline_size = 7
+Button/font_sizes/font_size = 25
+Button/fonts/font = ExtResource("1_dt1p4")
+Button/styles/focus = SubResource("StyleBoxEmpty_dt1p4")
+Button/styles/hover = SubResource("StyleBoxEmpty_dn4vi")
+Button/styles/normal = SubResource("StyleBoxEmpty_apm7t")
+Button/styles/pressed = SubResource("StyleBoxEmpty_1lsov")
 Label/colors/font_color = Color(0.86508, 0.284962, 0, 1)
 Label/colors/font_outline_color = Color(0.325815, 0.191276, 0.0409338, 1)
 Label/constants/outline_size = 7
 Label/fonts/font = ExtResource("1_dt1p4")
+VSlider/icons/grabber = ExtResource("2_dn4vi")
+VSlider/icons/grabber_highlight = ExtResource("2_dn4vi")
+VSlider/styles/grabber_area = SubResource("StyleBoxEmpty_m4fr6")
+VSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_4ubf7")
+VSlider/styles/slider = SubResource("StyleBoxLine_r0ra0")

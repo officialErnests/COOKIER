@@ -1,7 +1,7 @@
 extends TileMapLayer
 
 var particle = preload("res://Scene/particle_explosion.tscn")
-func destory(in_position, radius) -> void:
+func destory(in_position, radius : int) -> void:
 	var t_position = Vector2i(round(in_position/16))
 	# print(t_position, in_position)
 	var pos2 : Array[Vector2i] = []
@@ -19,7 +19,7 @@ func destory(in_position, radius) -> void:
 		for y in range(radius*2 + 3):
 			if get_cell_tile_data(t_position + Vector2i(x - radius - 1, y - radius - 1)):
 				erase_cell(t_position + Vector2i(x - radius - 1, y - radius - 1))
-				particles((t_position + Vector2i(x - radius - 1, y - radius - 1))*16)
+				if CookLevel.particles: particles((t_position + Vector2i(x - radius - 1, y - radius - 1))*16)
 	CookLevel.cook_level += pow(radius * 2,2) * CookLevel.cook_multiplier
 	CookLevel.cook_multiplier += pow(radius * 2,2)
 	CookLevel.time_till_end = CookLevel.max_time
