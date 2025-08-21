@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3 uid="uid://dap31bc4almyo"]
+
+[ext_resource type="Script" uid="uid://dy0rmhk6dj8ie" path="res://Scripts/Moving_Main.gd" id="1_sewl6"]
+[ext_resource type="Theme" uid="uid://b7q7d172o1ecr" path="res://Themes/main.tres" id="2_r64ir"]
+[ext_resource type="Texture2D" uid="uid://dj3u2vd4uu75u" path="res://Assets/Main_menu_Cookie.png" id="3_aqo18"]
+[ext_resource type="Script" uid="uid://b7llbb1lxtfng" path="res://Scripts/Main_menu.gd" id="4_4xbtg"]
+[ext_resource type="Texture2D" uid="uid://csc4i418y7d0" path="res://Assets/Main_menu_Button_bottom.png" id="5_ddjkq"]
+[ext_resource type="Texture2D" uid="uid://dnkbkvwwo4skd" path="res://Assets/Main_menu_Button_top.png" id="6_1l5my"]
+
+[node name="Pause_sceen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sewl6")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+z_index = 8
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_aqo18")
+expand_mode = 1
+script = ExtResource("4_4xbtg")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+z_index = 9
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_ddjkq")
+expand_mode = 1
+script = ExtResource("4_4xbtg")
+
+[node name="Button2" type="Button" parent="TextureRect3"]
+z_index = 20
+layout_mode = 0
+offset_left = 83.0
+offset_top = 293.0
+offset_right = 629.0
+offset_bottom = 378.0
+rotation = -0.162008
+scale = Vector2(0.458604, 0.540495)
+theme = ExtResource("2_r64ir")
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/font_size = 66
+text = "V-PARTICLES"
+expand_icon = true
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_1l5my")
+expand_mode = 1
+script = ExtResource("4_4xbtg")
+
+[node name="Play" type="Button" parent="TextureRect4"]
+z_index = 10
+layout_mode = 0
+offset_left = 85.0
+offset_top = 161.0
+offset_right = 338.0
+offset_bottom = 246.0
+rotation = 0.0581182
+scale = Vector2(0.667471, 0.607353)
+theme = ExtResource("2_r64ir")
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/font_size = 66
+text = "CONTINUE"
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+z_index = 20
+layout_mode = 0
+offset_left = 76.0
+offset_top = 39.0
+offset_right = 297.0
+offset_bottom = 62.0
+rotation = 0.246707
+scale = Vector2(1.31272, 2.15266)
+theme = ExtResource("2_r64ir")
+text = "SCORE: 0000000000"
+
+[connection signal="button_up" from="TextureRect3/Button2" to="TextureRect3" method="_on_button_2_button_up"]
+[connection signal="button_up" from="TextureRect4/Play" to="TextureRect4" method="_on_play_button_up"]

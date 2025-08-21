@@ -9,14 +9,17 @@ var update = 0
 
 func _physics_process(delta: float) -> void:
 	var tTime_dialation =  CookLevel.time_dialation
-	velocity.y += delta * 500
+	velocity.y += delta * 500 * (1-tTime_dialation)
 	charge = false
 	if is_on_ceiling():
 		if prev_velocity.y < -200:
-			ground.destory(position,1)
-		velocity.y = prev_velocity.y / 2 - 100
+			ground.destory(position,2)
+		velocity.y = prev_velocity.y  * 0.9
 		if Input.is_action_pressed("jump"):
 			velocity.y -= 100
+		if Input.get_axis("left","right") == getDirection(prev_velocity.x) * -1:
+			velocity.x = -prev_velocity.x 
+			camera.NB_global_pos.x = global_position.x
 	if is_on_floor():
 		velocity *= 0.99
 		velocity.x += Input.get_axis("left","right") * delta * SPEED
@@ -25,17 +28,16 @@ func _physics_process(delta: float) -> void:
 			ground.destory(position + Vector2(0,-16),floor(prev_velocity.y/200))
 			camera.NB_zoomVel -= 1/camera.zoom.x
 			camera.zoom = Vector2.ONE * 5
+			velocity.x += prev_velocity.y if velocity.x > 0 else -prev_velocity.y
 		if Input.is_action_pressed("jump"):
 			velocity.y = -300
 		if Input.is_action_pressed("down"):
-			if prev_velocity.y > 1000:
-				velocity.x += prev_velocity.y if velocity.x > 0 else -prev_velocity.y
 			velocity.x += (1000 * delta if velocity.x > 0 else -1000 * delta)
 			velocity *= 0.98
 			camera.NB_velocity += velocity/100 * Vector2(randi_range(-1,1),randi_range(-1,1))
 			charge = true
 	else:
-		velocity *= 0.995
+		velocity *= 1 - 0.005 * (1-tTime_dialation)
 		velocity.x += Input.get_axis("left","right") * delta * SPEED / 2
 		if Input.is_action_pressed("down"):
 			velocity.y += 100
@@ -59,10 +61,12 @@ func _physics_process(delta: float) -> void:
 	if not charge:
 		camera.position = Vector2(0,0)
 		if update <= 0:
-			update = tTime_dialation / 2.0
+			update = tTime_dialation / 3.0
 			move_and_slide()
 		else:
 			update -= delta
+	if CookLevel.tiem_till_collaps > 0 and position.length() > CookLevel.distance_in_oven:
+		CookLevel.tiem_till_collaps = 0
 
 func getDirection(i_position) -> int:
 	return 1 if i_position > 0 else 0 if i_position == 0 else -1

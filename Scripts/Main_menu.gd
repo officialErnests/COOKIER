@@ -1,5 +1,9 @@
 extends TextureRect
 
+func _ready() -> void:
+    if find_child("Play"):
+        $Play.grab_focus()
+
 func _on_button_2_button_up() -> void:
     CookLevel.particles = !CookLevel.particles
     if CookLevel.particles:

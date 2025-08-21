@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhg68wja55ttk"]
+[gd_scene load_steps=14 format=3 uid="uid://bhg68wja55ttk"]
 
 [ext_resource type="Script" uid="uid://dy0rmhk6dj8ie" path="res://Scripts/Moving_Main.gd" id="1_6nqpc"]
 [ext_resource type="Texture2D" uid="uid://rk7yxwmwofek" path="res://Assets/Main_menu_BG.png" id="2_qf8tx"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://d2gmnmiipjdg1" path="res://Assets/Main_menu_Cookier.png" id="6_du3yi"]
 [ext_resource type="Theme" uid="uid://b7q7d172o1ecr" path="res://Themes/main.tres" id="6_qf8tx"]
 [ext_resource type="Script" uid="uid://b7llbb1lxtfng" path="res://Scripts/Main_menu.gd" id="6_v5kgo"]
+[ext_resource type="Script" uid="uid://x66sgri5ybl1" path="res://Scripts/LogoText.gd" id="8_vbdn0"]
+[ext_resource type="Texture2D" uid="uid://cvxf5nvpjocyb" path="res://Assets/Main_menu_LongText.png" id="9_v5kgo"]
 
 [sub_resource type="Curve" id="Curve_p3x8m"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.025641, 0.520311), 0.0, 0.0, 0, 0, Vector2(0.864469, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -102,6 +104,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 765.0
+offset_top = -21.0
+offset_right = 765.0
+offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -128,6 +134,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = 524.0
+offset_right = -31.0
+offset_bottom = 524.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -136,7 +146,7 @@ expand_mode = 1
 script = ExtResource("6_v5kgo")
 
 [node name="Button2" type="Button" parent="TextureRect3"]
-z_index = 20
+z_index = 30
 layout_mode = 0
 offset_left = 83.0
 offset_top = 293.0
@@ -156,6 +166,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -817.0
+offset_top = -19.0
+offset_right = -817.0
+offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -164,7 +178,7 @@ expand_mode = 1
 script = ExtResource("6_v5kgo")
 
 [node name="Play" type="Button" parent="TextureRect4"]
-z_index = 10
+z_index = 30
 layout_mode = 0
 offset_left = 85.0
 offset_top = 161.0
@@ -177,8 +191,25 @@ theme_override_constants/outline_size = 11
 theme_override_font_sizes/font_size = 66
 text = "PLAY"
 
-[node name="TextureRect5" type="TextureRect" parent="."]
-z_index = 12
+[node name="Control2" type="Control" parent="." node_paths=PackedStringArray("logo", "text")]
+z_index = 15
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -497.0
+offset_right = -31.0
+offset_bottom = -497.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_vbdn0")
+logo = NodePath("COOKIER")
+text = NodePath("Text")
+
+[node name="COOKIER" type="TextureRect" parent="Control2"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -187,6 +218,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("6_du3yi")
+expand_mode = 1
+
+[node name="Text" type="TextureRect" parent="Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_v5kgo")
 expand_mode = 1
 
 [connection signal="value_changed" from="TextureRect2/Audio" to="TextureRect2" method="_on_audio_value_changed"]
