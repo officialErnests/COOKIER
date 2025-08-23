@@ -8,7 +8,7 @@ var tiem_till_collaps : float = 10
 var max_time_collapse = 100
 signal cook_o_Explosions()
 var time_dialation = 1
-var distance_in_oven = 7000
+var distance_in_oven = 100000
 
 var particles = true
 var volume = 1

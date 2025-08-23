@@ -1,5 +1,27 @@
 extends TileMapLayer
 
+@export var map_size = Vector2i(100,100)
+@export var islands = 0
+@export var ground_deviation = 10
+@export var ground_deviation_range = 10
+@export var ground_depth = 30
+var curent_ground = 0
+var next_ground = 0
+func _ready() -> void:
+	var map = [Vector2i(-1,1),Vector2i(0,1),Vector2i(1,1)]
+	for ground_x in range(0,(map_size.x/ground_deviation_range) - 1):
+		next_ground = clamp(curent_ground + randf_range(-ground_deviation, ground_deviation), map_size.y*-1, map_size.y-1)
+		for ground_transition_x in range(0,ground_deviation_range):
+			var normalized = float(ground_transition_x) / ground_deviation_range
+			var temp_y = floor(curent_ground * (1 - normalized) + next_ground * normalized)
+			var max_depth = ground_depth
+			while temp_y < map_size.y / 2 and max_depth != 0:
+				temp_y += 1
+				max_depth -= 1
+				map.append(Vector2i(ground_x * ground_deviation_range + ground_transition_x, temp_y))
+		curent_ground = next_ground
+	set_cells_terrain_connect(map,0,0)
+
 var particle = preload("res://Scene/particle_explosion.tscn")
 func destory(in_position, radius : int) -> void:
 	var t_position = Vector2i(round(in_position/16))

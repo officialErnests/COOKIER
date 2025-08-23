@@ -7,7 +7,7 @@ enum funn {
 	SPEED,
 	TIME,
 	BAKED
-}
+}	
 
 @export var display : funn = funn.COOKIES
 @onready var player = $"../../.."
@@ -28,4 +28,12 @@ func _process(delta: float) -> void:
 	elif display == funn.TIME:
 		text = str(int(player.position.length() / CookLevel.distance_in_oven * 100)) + "% - HEAT || TIME - " + str(int(CookLevel.tiem_till_collaps)) + " - TIME || HEAT - " + str(int(player.position.length() / CookLevel.distance_in_oven * 100)) + "%"
 	elif display == funn.BAKED:
-		visible = CookLevel.tiem_till_collaps <= 0 and not int(CookLevel.tiem_till_collaps) % 2 != 0
+		if CookLevel.tiem_till_collaps <= 0:
+			visible = true
+			if int(CookLevel.tiem_till_collaps/2) % 2 != 0:
+				text = "--!!!BAKED!!!--"
+				set("theme_override_font_sizes/font_size", 70)
+			else:
+				text = "COOKIER LEVEL: " + str(CookLevel.cook_level) + "00"
+				set("theme_override_font_sizes/font_size", 53 - 2 * str(CookLevel.cook_level).length())
+				#52 49 46 43
