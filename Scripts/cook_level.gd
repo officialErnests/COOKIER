@@ -9,6 +9,8 @@ var max_time_collapse = 100
 signal cook_o_Explosions()
 var time_dialation = 1
 var distance_in_oven = 100000
+var loading = true
+var map_size = Vector2.ONE
 
 var particles = true
 var volume = 1

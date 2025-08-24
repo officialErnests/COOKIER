@@ -8,6 +8,7 @@ var update = 0
 @onready var camera = $MainCam
 
 func _physics_process(delta: float) -> void:
+	if CookLevel.loading: return
 	var tTime_dialation =  CookLevel.time_dialation
 	velocity.y += delta * 500 * (1-tTime_dialation)
 	charge = false
