@@ -1,25 +1,66 @@
 extends TileMapLayer
 
-@export var map_size = Vector2i(100,100)
+@export var map_size = Vector2i(100,200)
 @export var islands = 0
-@export var ground_deviation = 10
+@export var ground_deviation = 100
 @export var ground_deviation_range = 10
 @export var ground_depth = 30
-var curent_ground = 0
-var next_ground = 0
+@export var border_size = 30
+@export var normiles_terain = 100
+@export var ground_spike_min_distance = 10
+@export var ground_spike_chance = 5
+
+
+func get_random(start, end) -> float:
+	var result = 0
+	for i in normiles_terain:
+		result += randf_range(start, end) * 1/normiles_terain
+	return result
+
+func gen_main_terrain(start, end, step, map):
+	var curent_ground = 0
+	var next_ground = 0
+	var dir_mul = 1 if step > 0 else -1
+	for ground_x in range(start,end,step):
+		next_ground = clamp(curent_ground + get_random(-ground_deviation, ground_deviation), map_size.y*-1, map_size.y-1)
+		for ground_transition_x in range(0,ground_deviation_range  * dir_mul, step):
+			var normalized = abs(float(ground_transition_x) / ground_deviation_range)
+			var temp_y = clamp(floor(curent_ground * (1 - normalized) + next_ground * normalized), map_size.y*-1, map_size.y - 1)
+			if ground_depth + temp_y < map_size.y - ground_spike_min_distance and randf_range(0, 100) < ground_spike_chance:
+				var max_depth = ground_depth
+				while temp_y < map_size.y:
+					temp_y += 1
+					max_depth -= 1
+					if max_depth > 0:
+						map.append(Vector2i(ground_x * ground_deviation_range + ground_transition_x, temp_y))
+					else:
+						var temp = sin(max_depth / 10.0)
+						var temp2 = floor(pow(temp, 2) * 10)
+						print(temp2)
+						for xadd in range(-temp2, temp2):
+							map.append(Vector2i(ground_x * ground_deviation_range + ground_transition_x + xadd, temp_y))
+			else:
+				var max_depth = ground_depth
+				while temp_y < map_size.y and max_depth != 0:
+					temp_y += 1
+					max_depth -= 1
+					map.append(Vector2i(ground_x * ground_deviation_range + ground_transition_x, temp_y))
+		curent_ground = next_ground
+
+
 func _ready() -> void:
 	var map = [Vector2i(-1,1),Vector2i(0,1),Vector2i(1,1)]
-	for ground_x in range(0,(map_size.x/ground_deviation_range) - 1):
-		next_ground = clamp(curent_ground + randf_range(-ground_deviation, ground_deviation), map_size.y*-1, map_size.y-1)
-		for ground_transition_x in range(0,ground_deviation_range):
-			var normalized = float(ground_transition_x) / ground_deviation_range
-			var temp_y = floor(curent_ground * (1 - normalized) + next_ground * normalized)
-			var max_depth = ground_depth
-			while temp_y < map_size.y / 2 and max_depth != 0:
-				temp_y += 1
-				max_depth -= 1
-				map.append(Vector2i(ground_x * ground_deviation_range + ground_transition_x, temp_y))
-		curent_ground = next_ground
+	gen_main_terrain(0,map_size.x/ground_deviation_range, 1, map)
+	gen_main_terrain(0,-(map_size.x/ground_deviation_range), -1, map)
+	for ground_y in range(-map_size.y,map_size.y):
+		for ground_x in range(border_size):
+			map.append(Vector2i(ground_x + map_size.x, ground_y))
+			map.append(Vector2i(-ground_x - map_size.x, ground_y))
+	for ground_x in range(-map_size.x, map_size.x):
+		for ground_y in range(border_size):
+			map.append(Vector2i(ground_x, map_size.y + ground_y))
+
+
 	set_cells_terrain_connect(map,0,0)
 
 var particle = preload("res://Scene/particle_explosion.tscn")

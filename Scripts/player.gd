@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var SPEED = 200
+var SPEED = 400
 var prev_velocity = 0
 var charge = false
 var update = 0
@@ -23,15 +23,25 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		velocity *= 0.99
 		velocity.x += Input.get_axis("left","right") * delta * SPEED
+		var ground_destruction = false
 		if prev_velocity.y > 500:
 			camera.global_position = global_position
-			ground.destory(position + Vector2(0,-16),floor(prev_velocity.y/200))
-			camera.NB_zoomVel -= 1/camera.zoom.x
-			camera.zoom = Vector2.ONE * 5
-			velocity.x += prev_velocity.y if velocity.x > 0 else -prev_velocity.y
+			if Input.is_action_pressed("down"):
+				ground_destruction = true
+				velocity.y = prev_velocity.y
+				ground.destory(position + Vector2(0,-16),floor(prev_velocity.y/2000))
+				velocity.x += prev_velocity.y / 10 if velocity.x > 0 else -prev_velocity.y / 10
+			else:
+				velocity.x += prev_velocity.y if velocity.x > 0 else -prev_velocity.y
+				ground.destory(position + Vector2(0,-16),floor(prev_velocity.y/200))
+				camera.NB_zoomVel -= 1/camera.zoom.x * 2
+				camera.zoom = Vector2.ONE * 5
 		if Input.is_action_pressed("jump"):
-			velocity.y = -300
-		if Input.is_action_pressed("down"):
+			if ground_destruction and abs(velocity.y) > 300:
+				velocity.y = -velocity.y
+			else:
+				velocity.y = -300
+		if Input.is_action_pressed("down") and not ground_destruction:
 			velocity.x += (1000 * delta if velocity.x > 0 else -1000 * delta)
 			velocity *= 0.98
 			camera.NB_velocity += velocity/100 * Vector2(randi_range(-1,1),randi_range(-1,1))
@@ -49,7 +59,7 @@ func _physics_process(delta: float) -> void:
 				velocity.x = -prev_velocity.x 
 				camera.NB_global_pos.x = global_position.x
 			else:
-				velocity.x = prev_velocity.x * 0.99
+				velocity.x = prev_velocity.x * 0.95
 				camera.NB_velocity += velocity / 100
 			# position.x -= velocity.x / 100
 		if Input.is_action_pressed("jump"):
