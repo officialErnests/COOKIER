@@ -1,23 +1,28 @@
 extends TileMapLayer
 
-@export var map_size = Vector2i(300,100)
+var map_size = CookLevel.map_size
 @export var islands = 0
-@export var ground_deviation = 100
-@export var ground_deviation_range = 10
+var ground_deviation = CookLevel.terain_deviation
+var ground_deviation_range = CookLevel.terrain_transition
 @export var ground_depth = 30
-@export var border_size = 30
+var border_size = CookLevel.border_size
 @export var normiles_terain = 100
 @export var ground_spike_min_distance = 10
-@export var ground_spike_chance = 5
+var ground_spike_chance = CookLevel.spike_chance
 @export var ground_spike_width = 4
-@export var ground_spike_lenght = 100
+@export var ground_spike_lenght = 70
 @export var ground_spike_rand_width = 10
-@export var ground_spike_rand_lenght = 10
-@export var visual = true
+@export var ground_spike_rand_lenght = 20
+var visual = !CookLevel.fastload
 
 func _init() -> void:
 	CookLevel.loading = true
 	CookLevel.map_size = map_size
+	CookLevel.cook_level = 0
+	CookLevel.cook_multiplier = 1
+	CookLevel.time_till_end = 0
+	CookLevel.tiem_till_collaps = CookLevel.max_time_collapse
+	CookLevel.time_dialation = 1
 
 func get_random(start, end) -> float:
 	var result = 0
@@ -58,9 +63,9 @@ func gen_main_terrain(start, end, step):
 					temp_y += 1
 					max_depth -= 1
 					temp_grnd.append(Vector2i(ground_x * ground_deviation_range + ground_transition_x, temp_y))
-		if temp_grnd.size() > 1000 and visual:
+		if temp_grnd.size() > 2000 and visual:
 			set_cells_terrain_connect(temp_grnd,0,0)
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.01).timeout
 		curent_ground = next_ground
 	set_cells_terrain_connect(temp_grnd,0,0)
 
@@ -77,14 +82,14 @@ func _ready() -> void:
 		if temp_grnd.size() > 1000 and visual:
 			set_cells_terrain_connect(temp_grnd,0,0)
 			temp_grnd = []
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.01).timeout
 	for ground_x in range(-map_size.x - border_size, map_size.x + border_size):
 		for ground_y in range(border_size):
 			temp_grnd.append(Vector2i(ground_x, map_size.y + ground_y))
 		if temp_grnd.size() > 1000 and visual:
 			set_cells_terrain_connect(temp_grnd,0,0)
 			temp_grnd = []
-			await get_tree().create_timer(0.1).timeout	
+			await get_tree().create_timer(0.01).timeout	
 	set_cells_terrain_connect(temp_grnd,0,0)
 	temp_grnd = []
 

@@ -26,7 +26,8 @@ func _process(delta: float) -> void:
 		position = Vector2(546.0,157.5) + Vector2(randf_range(-2,0), randf_range(-1,1)) * (player.velocity.length()/200)
 		scale = Vector2.ONE * (player.velocity.length()/10000+1)
 	elif display == funn.TIME:
-		text = str(int(player.position.length() / CookLevel.distance_in_oven * 100)) + "% - HEAT || TIME - " + str(int(CookLevel.tiem_till_collaps)) + " - TIME || HEAT - " + str(int(player.position.length() / CookLevel.distance_in_oven * 100)) + "%"
+
+		text = "TIME - " + str(int(CookLevel.tiem_till_collaps)) + " - TIME"
 	elif display == funn.BAKED:
 		if CookLevel.tiem_till_collaps <= 0:
 			visible = true

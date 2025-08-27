@@ -113,20 +113,6 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("3_v5kgo")
 expand_mode = 1
-script = ExtResource("6_v5kgo")
-
-[node name="Audio" type="VSlider" parent="TextureRect2"]
-z_index = 30
-layout_mode = 0
-offset_left = 582.0
-offset_top = 106.0
-offset_right = 598.0
-offset_bottom = 306.0
-theme = ExtResource("6_qf8tx")
-max_value = 1.0
-step = 0.1
-tick_count = 11
-ticks_on_borders = true
 
 [node name="TextureRect3" type="TextureRect" parent="."]
 z_index = 9
@@ -231,6 +217,5 @@ mouse_filter = 2
 texture = ExtResource("9_v5kgo")
 expand_mode = 1
 
-[connection signal="value_changed" from="TextureRect2/Audio" to="TextureRect2" method="_on_audio_value_changed"]
 [connection signal="button_up" from="TextureRect3/Button2" to="TextureRect3" method="_on_button_2_button_up"]
 [connection signal="button_up" from="TextureRect4/Play" to="TextureRect4" method="_on_play_button_up"]

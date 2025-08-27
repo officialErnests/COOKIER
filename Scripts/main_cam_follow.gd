@@ -6,7 +6,6 @@ var NB_zoomVel = 1
 var time_from_pause : float = 0
 
 func _ready() -> void:
-	CookLevel.tiem_till_collaps = CookLevel.max_time_collapse
 	zoom = Vector2.ONE * (15.0/CookLevel.map_size.x)
 
 func _process(delta: float) -> void:

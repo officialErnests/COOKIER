@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://couf5d2ja8hlw"]
+[gd_scene load_steps=16 format=3 uid="uid://couf5d2ja8hlw"]
 
 [ext_resource type="PackedScene" uid="uid://cbug8uf2jfnsj" path="res://Scene/player.tscn" id="1_jv8gs"]
 [ext_resource type="Texture2D" uid="uid://b6d4mpsdxod5h" path="res://Assets/tilemap/Cookie_dough.png" id="2_vh4eo"]
@@ -6,14 +6,10 @@
 [ext_resource type="Script" uid="uid://c3rmepsfchfqx" path="res://Scripts/cookierlevel.gd" id="3_1bk83"]
 [ext_resource type="Script" uid="uid://dn1gx7ihof05a" path="res://Scripts/destruction.gd" id="3_1btii"]
 [ext_resource type="Script" uid="uid://jntpygkaorbk" path="res://Scripts/follow_cam.gd" id="3_htkpn"]
-[ext_resource type="Script" uid="uid://2d5vv4dk6jwt" path="res://Scripts/cookVisual.gd" id="4_1bk83"]
 [ext_resource type="Script" uid="uid://di1ylt0fak0" path="res://Scripts/follow_cam_center.gd" id="5_44mwd"]
 [ext_resource type="Script" uid="uid://ca8pm8e8qp21q" path="res://Scripts/GameOver.gd" id="5_cvhse"]
 [ext_resource type="PackedScene" uid="uid://dap31bc4almyo" path="res://Scene/pause_sceen.tscn" id="5_moty0"]
 [ext_resource type="PackedScene" uid="uid://05p4v5puuijy" path="res://Scene/particle_explosion.tscn" id="6_qy5om"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_moty0"]
-blend_mode = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qy5om"]
 texture = ExtResource("2_vh4eo")
@@ -486,19 +482,6 @@ text = "1 SPEED
 "
 script = ExtResource("3_1bk83")
 display = 3
-
-[node name="ColorRect" type="ColorRect" parent="square/MainCam/BlocksEaten" index="8"]
-modulate = Color(1, 1, 1, 0)
-top_level = true
-light_mask = 0
-material = SubResource("CanvasItemMaterial_moty0")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0, 0, 1)
-script = ExtResource("4_1bk83")
 
 [node name="Lost" type="CanvasLayer" parent="square/MainCam" index="1"]
 

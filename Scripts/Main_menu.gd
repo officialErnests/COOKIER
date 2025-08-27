@@ -12,7 +12,7 @@ func _on_button_2_button_up() -> void:
         $Button2.text = "X-PARTICLES"
 
 func _on_play_button_up() -> void:
-    get_tree().change_scene_to_file("res://Scene/main_game.tscn")
+    get_tree().change_scene_to_file("res://Scene/Load.tscn")
 
 
 func _on_audio_value_changed(value:float) -> void:

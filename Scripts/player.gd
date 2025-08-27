@@ -76,7 +76,7 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 		else:
 			update -= delta
-	if CookLevel.tiem_till_collaps > 0 and position.length() > CookLevel.distance_in_oven:
+	if CookLevel.tiem_till_collaps > 0 and (abs(position.x) / 16 > CookLevel.map_size.x + CookLevel.border_size or position.y / 16 > CookLevel.map_size.y + CookLevel.border_size):
 		CookLevel.tiem_till_collaps = 0
 
 func getDirection(i_position) -> int:
