@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/DEATHOFCOOKIE5.mp3-3e3630b1c5e06f89dd17945268
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0.0
 bpm=0.0
 beat_count=0
