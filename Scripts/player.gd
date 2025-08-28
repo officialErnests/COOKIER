@@ -7,6 +7,9 @@ var update = 0
 @export var ground : TileMapLayer
 @onready var camera = $MainCam
 
+func _ready() -> void:
+	$Charge.volume_linear = CookLevel.volume
+
 func _physics_process(delta: float) -> void:
 	if CookLevel.loading: return
 	var tTime_dialation =  CookLevel.time_dialation
@@ -43,6 +46,10 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.y = -300
 		if Input.is_action_pressed("down") and not ground_destruction:
+			if $Charge.playing:
+				$Charge.pitch_scale = velocity.length() / 100
+			else:
+				$Charge.play()
 			velocity.x += (1000 * delta if velocity.x > 0 else -1000 * delta)
 			velocity *= 0.98
 			camera.NB_velocity += velocity/100 * Vector2(randi_range(-1,1),randi_range(-1,1))
@@ -70,6 +77,8 @@ func _physics_process(delta: float) -> void:
 	camera.NB_zoomVel -= velocity.length() / 200000
 	rotation_degrees += velocity.length() * delta * 10 * (1 if velocity.x > 0 else -1)
 	if not charge:
+		if $Charge.playing:
+			$Charge.stop()
 		camera.position = Vector2(0,0)
 		if update <= 0:
 			update = tTime_dialation / 3.0

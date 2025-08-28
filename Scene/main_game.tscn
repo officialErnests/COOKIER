@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://couf5d2ja8hlw"]
+[gd_scene load_steps=22 format=3 uid="uid://couf5d2ja8hlw"]
 
 [ext_resource type="PackedScene" uid="uid://cbug8uf2jfnsj" path="res://Scene/player.tscn" id="1_jv8gs"]
 [ext_resource type="Texture2D" uid="uid://b6d4mpsdxod5h" path="res://Assets/tilemap/Cookie_dough.png" id="2_vh4eo"]
@@ -10,6 +10,12 @@
 [ext_resource type="Script" uid="uid://ca8pm8e8qp21q" path="res://Scripts/GameOver.gd" id="5_cvhse"]
 [ext_resource type="PackedScene" uid="uid://dap31bc4almyo" path="res://Scene/pause_sceen.tscn" id="5_moty0"]
 [ext_resource type="PackedScene" uid="uid://05p4v5puuijy" path="res://Scene/particle_explosion.tscn" id="6_qy5om"]
+[ext_resource type="AudioStream" uid="uid://ut55abxs5inm" path="res://Assets/Audio/Crack1.ogg" id="8_aokj6"]
+[ext_resource type="AudioStream" uid="uid://bpf17eqmiwhkp" path="res://Assets/Audio/Crack2.ogg" id="9_dybgj"]
+[ext_resource type="AudioStream" uid="uid://qo04x1domf7a" path="res://Assets/Audio/Crack3.ogg" id="10_qj7h1"]
+[ext_resource type="AudioStream" uid="uid://c6wbv28l3juwj" path="res://Audiowide/DEATHOFCOOKIE5.mp3" id="11_l3v68"]
+[ext_resource type="AudioStream" uid="uid://cegw5gp8eyevk" path="res://Assets/Audio/Eat.ogg" id="11_tjfp4"]
+[ext_resource type="Script" uid="uid://o0k06lka758a" path="res://Scene/audio_volume.gd" id="12_aguk3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qy5om"]
 texture = ExtResource("2_vh4eo")
@@ -431,7 +437,7 @@ turbulence_initial_displacement_max = -4.0
 [node name="square" parent="." node_paths=PackedStringArray("ground") instance=ExtResource("1_jv8gs")]
 ground = NodePath("../MainWorld")
 
-[node name="MainCam" parent="square" index="2"]
+[node name="MainCam" parent="square" index="3"]
 zoom = Vector2(0.53, 0.53)
 
 [node name="COOKIERLEVEL" parent="square/MainCam/BlocksEaten" index="0"]
@@ -529,6 +535,18 @@ visible = false
 tile_set = SubResource("TileSet_1btii")
 script = ExtResource("3_1btii")
 
+[node name="Crack1" type="AudioStreamPlayer" parent="MainWorld"]
+stream = ExtResource("8_aokj6")
+
+[node name="Crack2" type="AudioStreamPlayer" parent="MainWorld"]
+stream = ExtResource("9_dybgj")
+
+[node name="Crack3" type="AudioStreamPlayer" parent="MainWorld"]
+stream = ExtResource("10_qj7h1")
+
+[node name="Eat" type="AudioStreamPlayer" parent="MainWorld"]
+stream = ExtResource("11_tjfp4")
+
 [node name="LightBg" type="ColorRect" parent="."]
 z_index = -10
 anchors_preset = 8
@@ -588,6 +606,10 @@ process_material = SubResource("ParticleProcessMaterial_qy5om")
 script = ExtResource("5_44mwd")
 
 [node name="ParticleExplosion" parent="GPUParticles2D" instance=ExtResource("6_qy5om")]
+
+[node name="Deathofcookie5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_l3v68")
+script = ExtResource("12_aguk3")
 
 [connection signal="button_up" from="square/MainCam/Lost/VBoxContainer/Rebake" to="square/MainCam/Lost/VBoxContainer" method="_on_rebake_button_up"]
 [connection signal="button_up" from="square/MainCam/Lost/VBoxContainer/Eat" to="square/MainCam/Lost/VBoxContainer" method="_on_eat_button_up"]

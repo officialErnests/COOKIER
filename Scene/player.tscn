@@ -1,13 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbug8uf2jfnsj"]
+[gd_scene load_steps=7 format=3 uid="uid://cbug8uf2jfnsj"]
 
 [ext_resource type="Texture2D" uid="uid://bvevm53cnx2x6" path="res://Assets/Cookie.png" id="1_kelma"]
 [ext_resource type="Script" uid="uid://db47kpyvsoi4f" path="res://Scripts/player.gd" id="1_y8w33"]
+[ext_resource type="AudioStream" uid="uid://c55knw65hklme" path="res://Assets/Audio/Charge.ogg" id="2_r6jsd"]
 [ext_resource type="Script" uid="uid://cpkyhpmup6sb2" path="res://Scripts/main_cam_follow.gd" id="3_xa75v"]
 [ext_resource type="Theme" uid="uid://b7q7d172o1ecr" path="res://Themes/main.tres" id="4_58ae2"]
 [ext_resource type="Script" uid="uid://c3rmepsfchfqx" path="res://Scripts/cookierlevel.gd" id="5_ivevv"]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_y8w33")
+
+[node name="Charge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_r6jsd")
 
 [node name="Charecter" type="Sprite2D" parent="."]
 texture = ExtResource("1_kelma")

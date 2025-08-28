@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnv06oshbef4w"]
+[gd_scene load_steps=12 format=3 uid="uid://dnv06oshbef4w"]
 
 [ext_resource type="Script" uid="uid://dy0rmhk6dj8ie" path="res://Scripts/Moving_Main.gd" id="1_p456p"]
 [ext_resource type="Texture2D" uid="uid://rk7yxwmwofek" path="res://Assets/Main_menu_BG.png" id="2_6k4qj"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://b7llbb1lxtfng" path="res://Scripts/Main_menu.gd" id="4_aueo0"]
 [ext_resource type="Theme" uid="uid://b7q7d172o1ecr" path="res://Themes/main.tres" id="5_a5utg"]
 [ext_resource type="Script" uid="uid://c3jij3djb4ukl" path="res://Scene/play_n_load.gd" id="6_wdu72"]
+[ext_resource type="AudioStream" uid="uid://c6wbv28l3juwj" path="res://Audiowide/DEATHOFCOOKIE5.mp3" id="7_g3ywj"]
+[ext_resource type="Script" uid="uid://o0k06lka758a" path="res://Scene/audio_volume.gd" id="8_tjhrw"]
 
 [sub_resource type="Curve" id="Curve_p3x8m"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.025641, 0.520311), 0.0, 0.0, 0, 0, Vector2(0.864469, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -121,7 +123,7 @@ offset_bottom = 306.0
 theme = ExtResource("5_a5utg")
 max_value = 1.0
 step = 0.1
-value = 0.5
+value = 0.3
 tick_count = 11
 ticks_on_borders = true
 
@@ -158,10 +160,10 @@ text = "Width"
 [node name="SpinBox" type="SpinBox" parent="VBoxContainer/Width"]
 layout_mode = 2
 theme = ExtResource("5_a5utg")
-min_value = 100.0
+min_value = 50.0
 max_value = 10000.0
-step = 100.0
-value = 200.0
+step = 50.0
+value = 100.0
 
 [node name="Height" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -175,10 +177,10 @@ text = "Height"
 [node name="SpinBox" type="SpinBox" parent="VBoxContainer/Height"]
 layout_mode = 2
 theme = ExtResource("5_a5utg")
-min_value = 50.0
+min_value = 25.0
 max_value = 500.0
-step = 50.0
-value = 100.0
+step = 25.0
+value = 50.0
 
 [node name="Borders" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -261,6 +263,10 @@ alignment = 1
 [node name="Play" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "--- !!! COOK !!! ---"
+
+[node name="Deathofcookie5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_g3ywj")
+script = ExtResource("8_tjhrw")
 
 [connection signal="value_changed" from="TextureRect2/Audio" to="TextureRect2" method="_on_audio_value_changed"]
 [connection signal="button_up" from="VBoxContainer/Play" to="VBoxContainer" method="_on_play_button_up"]

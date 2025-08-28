@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhg68wja55ttk"]
+[gd_scene load_steps=16 format=3 uid="uid://bhg68wja55ttk"]
 
 [ext_resource type="Script" uid="uid://dy0rmhk6dj8ie" path="res://Scripts/Moving_Main.gd" id="1_6nqpc"]
 [ext_resource type="Texture2D" uid="uid://rk7yxwmwofek" path="res://Assets/Main_menu_BG.png" id="2_qf8tx"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://b7llbb1lxtfng" path="res://Scripts/Main_menu.gd" id="6_v5kgo"]
 [ext_resource type="Script" uid="uid://x66sgri5ybl1" path="res://Scripts/LogoText.gd" id="8_vbdn0"]
 [ext_resource type="Texture2D" uid="uid://cvxf5nvpjocyb" path="res://Assets/Main_menu_LongText.png" id="9_v5kgo"]
+[ext_resource type="AudioStream" uid="uid://c6wbv28l3juwj" path="res://Audiowide/DEATHOFCOOKIE5.mp3" id="11_du3yi"]
+[ext_resource type="Script" uid="uid://o0k06lka758a" path="res://Scene/audio_volume.gd" id="12_55g6a"]
 
 [sub_resource type="Curve" id="Curve_p3x8m"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.025641, 0.520311), 0.0, 0.0, 0, 0, Vector2(0.864469, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -216,6 +218,10 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("9_v5kgo")
 expand_mode = 1
+
+[node name="Deathofcookie5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_du3yi")
+script = ExtResource("12_55g6a")
 
 [connection signal="button_up" from="TextureRect3/Button2" to="TextureRect3" method="_on_button_2_button_up"]
 [connection signal="button_up" from="TextureRect4/Play" to="TextureRect4" method="_on_play_button_up"]

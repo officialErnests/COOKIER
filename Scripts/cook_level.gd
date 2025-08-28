@@ -9,9 +9,10 @@ var max_time_collapse = 100
 signal cook_o_Explosions()
 var time_dialation = 1
 var loading = true
+var audio_progresion = 0
 
 var particles = true
-var volume = 1
+var volume = 0.3
 var map_size = Vector2i(300,100)
 var border_size = 30
 var terain_deviation = 100

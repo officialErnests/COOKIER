@@ -1,5 +1,7 @@
 extends VBoxContainer
 
+func _ready() -> void:
+	$Width/SpinBox.grab_click_focus()
 
 func _on_play_button_up() -> void:
 	CookLevel.map_size = Vector2i($Width/SpinBox.value, $Height/SpinBox.value)

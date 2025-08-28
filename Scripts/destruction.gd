@@ -15,6 +15,8 @@ var ground_spike_chance = CookLevel.spike_chance
 @export var ground_spike_rand_lenght = 20
 var visual = !CookLevel.fastload
 
+var randomSfx = []
+
 func _init() -> void:
 	CookLevel.loading = true
 	CookLevel.map_size = map_size
@@ -65,12 +67,20 @@ func gen_main_terrain(start, end, step):
 					temp_grnd.append(Vector2i(ground_x * ground_deviation_range + ground_transition_x, temp_y))
 		if temp_grnd.size() > 2000 and visual:
 			set_cells_terrain_connect(temp_grnd,0,0)
+			randomSfxPlay()
 			await get_tree().create_timer(0.01).timeout
 		curent_ground = next_ground
 	set_cells_terrain_connect(temp_grnd,0,0)
 
 
 func _ready() -> void:
+	$Crack1.volume_linear = CookLevel.volume
+	$Crack2.volume_linear = CookLevel.volume
+	$Crack3.volume_linear = CookLevel.volume
+	$Eat.volume_linear = CookLevel.volume
+	randomSfx.append($Crack1)
+	randomSfx.append($Crack2)
+	randomSfx.append($Crack3)
 	await get_tree().create_timer(1).timeout
 	gen_main_terrain(0,map_size.x/ground_deviation_range, 1)
 	gen_main_terrain(0,-(map_size.x/ground_deviation_range), -1)
@@ -82,6 +92,7 @@ func _ready() -> void:
 		if temp_grnd.size() > 1000 and visual:
 			set_cells_terrain_connect(temp_grnd,0,0)
 			temp_grnd = []
+			randomSfxPlay()
 			await get_tree().create_timer(0.01).timeout
 	for ground_x in range(-map_size.x - border_size, map_size.x + border_size):
 		for ground_y in range(border_size):
@@ -89,12 +100,18 @@ func _ready() -> void:
 		if temp_grnd.size() > 1000 and visual:
 			set_cells_terrain_connect(temp_grnd,0,0)
 			temp_grnd = []
+			randomSfxPlay()
 			await get_tree().create_timer(0.01).timeout	
 	set_cells_terrain_connect(temp_grnd,0,0)
 	temp_grnd = []
 
 	
 	CookLevel.loading = false
+
+func randomSfxPlay() -> void:
+	var rndSfx : AudioStreamPlayer = randomSfx.pick_random()
+	rndSfx.pitch_scale = randf_range(0.9,1.1)
+	rndSfx.play()
 
 var particle = preload("res://Scene/particle_explosion.tscn")
 func destory(in_position, radius : int) -> void:
@@ -116,9 +133,12 @@ func destory(in_position, radius : int) -> void:
 			if get_cell_tile_data(t_position + Vector2i(x - radius - 1, y - radius - 1)):
 				erase_cell(t_position + Vector2i(x - radius - 1, y - radius - 1))
 				if CookLevel.particles: particles((t_position + Vector2i(x - radius - 1, y - radius - 1))*16)
+		randomSfxPlay()
 	if CookLevel.tiem_till_collaps > 0:
 		CookLevel.cook_level += pow(radius * 2,2) * CookLevel.cook_multiplier
 		CookLevel.cook_multiplier += pow(radius * 2,2)
+		$Eat.pitch_scale = randf_range(0.9,1.1)
+		$Eat.play()
 	CookLevel.time_till_end = CookLevel.max_time
 	CookLevel.cook_o_Explosions.emit(pow(radius * 2,2))
 	set_cells_terrain_connect(pos2,0,0)

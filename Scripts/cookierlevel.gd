@@ -36,5 +36,5 @@ func _process(delta: float) -> void:
 				set("theme_override_font_sizes/font_size", 70)
 			else:
 				text = "COOKIER LEVEL: " + str(CookLevel.cook_level) + "00"
-				set("theme_override_font_sizes/font_size", 53 - 2 * str(CookLevel.cook_level).length())
+				set("theme_override_font_sizes/font_size", 53 - 3 * str(CookLevel.cook_level).length())
 				#52 49 46 43
