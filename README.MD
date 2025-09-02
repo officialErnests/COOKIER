@@ -1,9 +1,14 @@
-Features:
+# CoolFiles:
+All scripts neatly in script folder :DD 
+# Features:
 1. Procedual generation
 2. Destructive terrain
 3. Super cool player controller
 4. Super duper cool music
 5. Cool menu
+# How to use:
+You can play using itch -> https://n0o0b090lv.itch.io/cookier
+(no need to download)
 Assets:
 ALLL PLAYER CONTROLLER WAS BY ME
 ALLLLL SFX AND MUSIC WAS BY ME
